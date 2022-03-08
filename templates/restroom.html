@@ -113,7 +113,7 @@
                         let name = rows[i]['name']
                         let comment = rows[i]['comment']
                         let star = rows[i]['star']
-
+                        let num = rows[i]['num']
 
                         let star_image = '⭐'.repeat(star)
 
@@ -123,6 +123,16 @@
                                                     <p>${star_image}</p>
                                                     <p>${comment}</p>
                                                     <footer class="blockquote-footer">${name}</footer>
+                                                    <div style="display: flex;">
+                                                        <div id="update_review" style="margin-right: 10px;">
+                                                            <button type="button" class="btn btn-outline-info">수정</button>
+                                                        </div>
+                                                        <div id="btn-delete" ">
+                                                            <button onclick="delete_review(${num}) type="button" class="btn btn-outline-danger">삭제</button>
+                                                        </div>
+
+                                                    </div>
+
                                                 </blockquote>
                                             </div>
                                         </div>`
@@ -167,22 +177,23 @@
             });
         }
 
-        function delete_review() {
+        function delete_review(num) {
             $.ajax({
                 type: "POST",
-                url: "/review",
-                data: {},
+                url: "/review/delete",
+                data: {num_give: num},
                 success: function (response) {
                     alert(response["msg"])
                 }
             });
+            window.location.reload()
         }
     </script>
 
 </head>
 <body>
 
-<div id="restroom_box" class="card mb-3" style="max-width: 1800px; witdth: 95%;">
+<div id="restroom_box" class="card mb-3" style="max-width: 1800px; width: 95%;">
     <div class="row g-0">
         <div class="col-md-4">
             <img src="https://cdn.pharmnews.com/news/photo/202008/101156_52033_4133.jpg" class="img-fluid rounded-start"
@@ -298,7 +309,7 @@
                         <button type="button" class="btn btn-outline-info">수정</button>
                     </div>
                     <div id="delete_review">
-                        <button type="button" class="btn btn-outline-danger">삭제</button>
+                        <button onclick="delete_review()" type="button" class="btn btn-outline-danger">삭제</button>
                     </div>
 
                 </div>

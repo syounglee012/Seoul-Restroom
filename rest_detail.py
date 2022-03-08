@@ -17,11 +17,13 @@ def reivew_post():
     name_receive = request.form["name_give"]
     comment_receive = request.form["comment_give"]
     star_receive = request.form['star_give']
-
+    comment_list = list(db.review.find({},{'_id':False}))
+    count = len(comment_list)+1
     doc = {
         'name': name_receive,
         'comment': comment_receive,
-        'star': star_receive
+        'star': star_receive,
+        'num':count
     }
 
     db.reivew.insert_one(doc)
@@ -43,6 +45,13 @@ def detail_get():
     return jsonify({'details' : res_Detail,
                     'img_list' : img_list})
 
+@app.route("/review/delete", methods=["POST"])
+def bucket_undo():
+    num_receive = request.form['num_give']
+    db.review.delete_one({'num':int(num_receive)})
+    return jsonify({'msg': '삭제완료!'})
+
+
 
 if __name__ == '__main__':
-   app.run('0.0.0.0', port=5000, debug=True)
+   app.run('0.0.0.0', port=8000, debug=True)
