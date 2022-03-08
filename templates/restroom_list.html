@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>임시 제목입니다.</title>
+
+    <!-- Bulma CSS 링크 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script type="text/javascript" defer src="../static/js/ts_js.js"></script>
+    <script defer src="../static/js/map.js"></script>
+    <style>
+        .restroom_list_css {
+            width: 88%;
+            margin-left: 100px;
+            margin-right: 50px;
+        }
+
+        .hero {
+            margin-bottom: 30px;
+        }
+
+        .message {
+
+            margin: 30px;
+        }
+
+        .message-body {
+            height: 200px;
+        }
+
+        .mainImg {
+            float: right;
+        }
+
+        .rest-title {
+            float: left;
+        }
+
+        .star {
+            float: right;
+        }
+
+        #map {
+            height: 400px;
+            /* The height is 400 pixels */
+            width: 100%;
+            /* The width is the width of the web page */
+        }
+    </style>
+
+</head>
+
+
+<body>
+<section class="hero is-info">
+    <div class="hero-body">
+        <p class="title">
+            화장실 리스트
+        </p>
+        <p class="subtitle">
+            가까운 곳을 안내합니다.
+        </p>
+    </div>
+</section>
+
+<h3>My Google Maps Demo</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=key&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+
+<ul id="restroom_list" class="restroom_list_css">
+</ul>
+
+</body>
+</html>

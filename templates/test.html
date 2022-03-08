@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div id="container">
+    <article id="title"><h1>서울 <span id="dist">마포구</span> 맛집 TOP20</h1></article>
+    <section id="list-box"></section>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        get_list();
+    });
+
+    function get_list() {
+        $.ajax({
+            type: "GET",
+            url: "/detail/district?district={{dist}}",
+            data: {},
+            success: function (response) {
+                // console.log("{{dist}}")
+                // console.log("pass")
+                // console.log(response)
+
+                let rows = response['result']
+                document.querySelector("#dist").innerText = rows[0].restaurant_district
+                const guList = document.querySelectorAll("#gulist > option")
+                for (let gu of guList) {
+                    // console.log(gu)
+                    if (gu.value === rows[0].restaurant_district) {
+                        gu.selected = true;
+                    }
+                }
+                for (let i = 0; i < rows.length; i++) {
+                    let cnt = parseInt(`${rows[i].total_score}`);
+                    let starCnt = "";
+                    for (let j = 0; j < cnt; j++) {
+                        starCnt += "⭐";
+                    }
+                    let id = rows[i].mangoId;
+
+                    let temp_html = `<div class="list-box" onclick="detailPage('${id}')">
+                                        <div class="rank"><h2>${i + 1}</h2></div>
+                                            <div class="mainImg"><img src="${rows[i].restaurant_img}" alt="restaurantsImg"></div>
+                                            <div class="detail">
+                                                <h3>${rows[i].restaurant_name}</h3>
+                                                <p>${rows[i].restaurant_addr}</p>
+                                                <p>${rows[i].restaurant_kind}</p>
+                                            </div>
+                                            <div class="score">
+                                                <h3>총 <span>${rows[i].total_score}</span>${starCnt}</h3>
+                                                <p><img src="../static/img/logo-mango.svg"> ${rows[i].mango_score}</p>
+                                                <p><img src="../static/img/logo-dining.svg"> ${rows[i].dining_score}</p>
+                                            </div>
+                                      </div>`
+                    $('#list-box').append(temp_html)
+                }
+            }
+        })
+    }
+
+    function detailPage(id) {
+        window.location.href="/detail/detailreview?id="+id;
+    }
+
+    $("#gulist").on("change", function (e) {
+        location.href = "/detail?dist=" + $("#gulist > option:selected")[0].innerText
+    })
+</script>
+{% endblock %}
