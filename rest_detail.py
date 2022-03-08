@@ -8,7 +8,7 @@ db = client.sparta
 # mainpage
 @app.route('/')
 def home():
-   return render_template('index.html')
+   return render_template('restroom.html')
 
 # detailpage
 ## review_append
