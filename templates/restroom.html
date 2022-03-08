@@ -14,10 +14,10 @@
 
     <title>화장실 정보</title>
 
-   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
     <style>
         * {
-           font-family: 'Noto Serif KR', serif;
+            font-family: 'Sunflower', sans-serif;
 
         }
 
@@ -25,7 +25,7 @@
         .mypost {
             width: 95%;
             max-width: 700px;
-            height: 350px;
+            height: 370px;
             margin: 20px auto 20px auto;
 
             box-shadow: 0px 0px 3px 0px black;
@@ -49,6 +49,7 @@
             margin-top: 10px;
             margin-bottom: 10px;
             background-color: mintcream;
+            width: 500px;
 
         }
 
@@ -92,7 +93,7 @@
         }
 
         function show_comment() {
-            $('#comment-list').empty()
+            // $('#comment-list').empty()
             $.ajax({
                 type: "GET",
                 url: "/review",
@@ -102,10 +103,15 @@
                     for (let i = 0; i < rows.length; i++) {
                         let name = rows[i]['name']
                         let comment = rows[i]['comment']
+                        let star = rows[i]['star']
+
+
+                        let star_image = '⭐'.repeat(star)
 
                         let temp_html = `<div class="card">
                                             <div class="card-body">
                                                 <blockquote class="blockquote mb-0">
+                                                    <p>${star_image}</p>
                                                     <p>${comment}</p>
                                                     <footer class="blockquote-footer">${name}</footer>
                                                 </blockquote>
@@ -132,10 +138,7 @@
                     for (let i = 0; i < rows.length; i++) {
                         let name = rows[i]['name']
                         let address = rows[i]['address']
-                        let star = rows[i]['star']
 
-
-                        let star_image = '⭐'.repeat(star)
 
                         let temp_html = `<div class="row g-0">
                                             <div class="col-md-4">
@@ -145,12 +148,23 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title">${name}</h5>
                                                     <p class="card-text">${address}</p>
-                                                    <p class="card-text"><small class="text-muted">${star_image}</small></p>
+                                                    <p class="card-text"><small class="text-muted">지도?</small></p>
                                                 </div>
                                             </div>
                                         </div>`
                         $('#restroom-box').append(temp_html)
                     }
+                }
+            });
+        }
+
+        function delete_review() {
+            $.ajax({
+                type: "POST",
+                url: "/review",
+                data: {},
+                success: function (response) {
+                    alert(response["msg"])
                 }
             });
         }
@@ -181,6 +195,17 @@
         <input type="text" class="form-control" id="name" placeholder="url" style="background-color: mintcream;">
         <label for="floatingInput">닉네임</label>
     </div>
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">별점</label>
+        <select class="form-select" id="star" style="background-color: mintcream;">
+            <option selected>-- 선택하기 --</option>
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+        </select>
+    </div>
     <div class="form-floating">
             <textarea class="form-control" placeholder="Leave a comment here" id="comment"
                       style="height: 150px; background-color: mintcream;"></textarea>
@@ -189,6 +214,83 @@
     <button onclick="save_comment()" type="button" class="btn btn-dark">리뷰 남기기</button>
 </div>
 <div class="mycards" id="comment-list">
+    <div class="card">
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>⭐⭐⭐⭐⭐</p>
+                <p>리뷰가 여기 달립니다.</p>
+                <footer class="blockquote-footer">닉네임</footer>
+                <div style="display: flex;">
+                    <div id="update_review" style="margin-right: 10px;">
+                        <button type="button" class="btn btn-outline-info">수정</button>
+                    </div>
+                    <div id="btn-delete" onclick="delete_review()">
+                        <button type="button" class="btn btn-outline-danger">삭제</button>
+                    </div>
+
+                </div>
+
+            </blockquote>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>⭐⭐⭐⭐⭐</p>
+                <p>리뷰가 여기 달립니다.</p>
+                <footer class="blockquote-footer">닉네임</footer>
+                <div style="display: flex;">
+                    <div id="update_review" style="margin-right: 10px;">
+                        <button type="button" class="btn btn-outline-info">수정</button>
+                    </div>
+                    <div id="delete_review">
+                        <button type="button" class="btn btn-outline-danger">삭제</button>
+                    </div>
+
+                </div>
+
+            </blockquote>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>⭐⭐⭐⭐⭐</p>
+                <p>리뷰가 여기 달립니다.</p>
+                <footer class="blockquote-footer">닉네임</footer>
+                <div style="display: flex;">
+                    <div id="update_review" style="margin-right: 10px;">
+                        <button type="button" class="btn btn-outline-info">수정</button>
+                    </div>
+                    <div id="delete_review">
+                        <button type="button" class="btn btn-outline-danger">삭제</button>
+                    </div>
+
+                </div>
+
+            </blockquote>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>⭐⭐⭐⭐⭐</p>
+                <p>리뷰가 여기 달립니다.</p>
+                <footer class="blockquote-footer">닉네임</footer>
+                <div style="display: flex;">
+                    <div id="update_review" style="margin-right: 10px;">
+                        <button type="button" class="btn btn-outline-info">수정</button>
+                    </div>
+                    <div id="delete_review">
+                        <button type="button" class="btn btn-outline-danger">삭제</button>
+                    </div>
+
+                </div>
+
+            </blockquote>
+        </div>
+    </div>
+
 
 </div>
 </body>
