@@ -16,10 +16,12 @@ def home():
 def reivew_post():
     name_receive = request.form["name_give"]
     comment_receive = request.form["comment_give"]
+    star_receive = request.form['star_give']
 
     doc = {
         'name': name_receive,
-        'comment': comment_receive
+        'comment': comment_receive,
+        'star': star_receive
     }
 
     db.reivew.insert_one(doc)
@@ -30,6 +32,8 @@ def reivew_post():
 def review_get():
     comment_list = list(db.review.find({},{'_id':False}))
     return jsonify({'comments':comment_list})
+
+
 
 @app.route("/detail", methods=["GET"])
 def detail_get():
