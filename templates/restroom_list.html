@@ -9,8 +9,7 @@
 
     <!-- Bulma CSS 링크 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <script type="text/javascript" defer src="../static/js/ts_js.js"></script>
-    <script defer src="../static/js/map.js"></script>
+    <script type="text/javascript" src="../static/js/ts_js.js"></script>
     <style>
         .restroom_list_css {
             width: 88%;
@@ -42,13 +41,6 @@
         .star {
             float: right;
         }
-
-        #map {
-            height: 400px;
-            /* The height is 400 pixels */
-            width: 100%;
-            /* The width is the width of the web page */
-        }
     </style>
 
 </head>
@@ -65,16 +57,6 @@
         </p>
     </div>
 </section>
-
-<h3>My Google Maps Demo</h3>
-    <!--The div element for the map -->
-    <div id="map"></div>
-
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=key&callback=initMap&libraries=&v=weekly"
-      async
-    ></script>
 
 <ul id="restroom_list" class="restroom_list_css">
 </ul>
