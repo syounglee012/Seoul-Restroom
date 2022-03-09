@@ -22,69 +22,6 @@
 
         }
 
-        .mypost {
-            width: 95%;
-            max-width: 700px;
-            height: 370px;
-            margin: 20px auto 20px auto;
-
-            box-shadow: 0px 0px 3px 0px black;
-            padding: 20px;
-            background-color: mintcream;
-        }
-
-        .mypost > button {
-            margin-top: 15px;
-            width: 660px;
-        }
-
-        .mycards {
-            width: 95%;
-            max-width: 500px;
-            margin: auto;
-            background-color: mintcream;
-        }
-
-        .mycards > .card {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            background-color: mintcream;
-            width: 500px;
-
-        }
-
-        body {
-            background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=http%3A%2F%2Fcfile5.uf.tistory.com%2Fimage%2F215B074857708C1C331110");
-            height: 100vh;
-
-            background-size: cover;
-        }
-
-        #restroom_box {
-            margin: 40px auto 40px auto;
-            overflow: hidden;
-            text-align: center;
-            font-size: xx-large;
-
-        }
-
-        #map {
-            {#height: 390px;#}
-            {#/* The height is 400 pixels */#}
-            {#width: 50%;#}
-            /* The width is the width of the web page */
-            margin: auto;
-            padding: 10px 10px;
-        }
-
-        .card {
-            margin: 20px auto;
-            border-color: #115b8d;
-        }
-
-        .col-md-4 {
-            margin: 20px auto;
-        }
     </style>
 
     {#성영님 js import#}
@@ -148,9 +85,6 @@
                                                             <p>${comment}</p>
                                                             <footer class="blockquote-footer">${name}</footer>
                                                             <div style="display: flex;">
-                                                                <div id="update_review" style="margin-right: 10px;">
-                                                                    <button type="button" class="btn btn-outline-info">수정</button>
-                                                                </div>
                                                                 <div id="btn-delete" ">
                                                                     <button onclick="delete_review(${num})" type="button" class="btn btn-outline-danger">삭제</button>
                                                                 </div>
@@ -265,7 +199,7 @@
     </div>
     <div class="form-floating">
             <textarea class="form-control" placeholder="Leave a comment here" id="comment"
-                      style="height: 150px;"></textarea>
+                     ></textarea>
         <label for="floatingTextarea2">화장실 리뷰</label>
     </div>
     <button onclick="save_comment()" type="button" class="btn btn-dark">리뷰 남기기</button>
