@@ -90,10 +90,14 @@
             let name = $('#name').val()
             let comment = $('#comment').val()
 
+
             $.ajax({
                 type: "POST",
                 url: "/review",
-                data: {'name_give': name, 'comment_give': comment},
+                data: {
+                    'name_give': name,
+                    'comment_give': comment
+                },
                 success: function (response) {
                     alert(response["msg"])
                     window.location.reload()
@@ -145,24 +149,39 @@
         function show_restroomInfo() {
             var url_string = window.location.href;
             var url = new URL(url_string);
-            var param = url.searchParams.get("id");
+            var param = url.searchParams.get("id"); // param = 1
 
             $('#restroom-box')
             $.ajax({
                 type: "GET",
-                url: "/detail?gu_names=" + param,
-                data: {},
+                url: "/detail?restroom_id=" + param, http://restroom.com/detail?restroom_id=1
+                data: {restroom_id: param},
                 success: function (response) {
-                    let rows = response['details']
+
+                    // response:
+                    // {
+                    //      details: [
+                    //          { name: 'woosung', address: '' }, // 0
+                    //      ]
+                    // }
+                    let rows = response['restroom_list'];
+                    let gu_name = response['gu_name']; // kangnam
+                    #let rows = response['details']
+                    let selected_restroom = rows[0] // => { name: 'woosung', address: '' }
+                    selected_restroom['name'] // rows[0]['name']
+                    selected_restroom['address'] // rows[0]['name']
                     for (let i = 0; i < rows.length; i++) {
                         let name = rows[i]['name']
                         let address = rows[i]['address']
 
 
+                        let temp_html = `<a href="/gu_names/${gu_name}/${restroom_id}">${name}</a>`
+                        $('#restroom_list').append(temp_html);
+
                         let temp_html = `<div class="row g-0">
-                                            <div class="col-md-4">
-                                                <img src="${url}" class="img-fluid rounded-start" alt="...">
-                                            </div>
+                                            // <div class="col-md-4">
+                                            //     <img src="${url}" class="img-fluid rounded-start" alt="...">
+                                            // </div>
                                             <div class="col-md-8">
                                                 <div class="card-body">
                                                     <h5 class="card-title">${name}</h5>
@@ -194,15 +213,16 @@
 
 </head>
 <body>
-
+// http://193.32.9.2/gu_names/kangseogu/3
 <div id="restroom_box" class="card mb-3" style="max-width: 1800px; width: 95%;">
     <div class="row g-0">
-        <div class="col-md-4">
-            <img src="https://cdn.pharmnews.com/news/photo/202008/101156_52033_4133.jpg" class="img-fluid rounded-start"
-                 alt="...">
-        </div>
+<!--        <div class="col-md-4">-->
+<!--            <img src="https://cdn.pharmnews.com/news/photo/202008/101156_52033_4133.jpg" class="img-fluid rounded-start"-->
+<!--                 alt="...">-->
+<!--        </div>-->
         <div class="col-md-8">
             <div class="card-body">
+                    <a href="/gu_names/kangseogu/3">isdjfois</a>
                 <h1 class="card-title">화장실 이름</h1>
                 <p class="card-text">주소가 들어 갑니다</p>
                 <p class="card-text">
@@ -210,7 +230,6 @@
                 <div id="map"></div>
                 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=&v=weekly"
                         async>
-
                 </script>
                 </p>
             </div>
@@ -242,6 +261,9 @@
     </div>
     <button onclick="save_comment()" type="button" class="btn btn-dark">리뷰 남기기</button>
 </div>
+<ul id="restroom_list">
+
+</ul>
 <div class="mycards" id="comment-list">
     <div class="card">
         <div class="card-body">
@@ -250,9 +272,9 @@
                 <p>리뷰가 여기 달립니다.</p>
                 <footer class="blockquote-footer">닉네임</footer>
                 <div style="display: flex;">
-                    <div style="margin-right: 10px;">
-                        <button type="button" class="btn btn-outline-info">수정</button>
-                    </div>
+<!--                    <div style="margin-right: 10px;">-->
+<!--                        <button type="button" class="btn btn-outline-info">수정</button>-->
+<!--                    </div>-->
                     <div id="btn-delete" onclick="delete_review()">
                         <button type="button" class="btn btn-outline-danger">삭제</button>
                     </div>
@@ -269,9 +291,7 @@
                 <p>리뷰가 여기 달립니다.</p>
                 <footer class="blockquote-footer">닉네임</footer>
                 <div style="display: flex;">
-                    <div id="updates" style="margin-right: 10px;">
-                        <button type="button" class="btn btn-outline-info">수정</button>
-                    </div>
+
                     <div id="delete">
                         <button type="button" class="btn btn-outline-danger">삭제</button>
                     </div>
@@ -288,9 +308,6 @@
                 <p>리뷰가 여기 달립니다.</p>
                 <footer class="blockquote-footer">닉네임</footer>
                 <div style="display: flex;">
-                    <div style="margin-right: 10px;">
-                        <button type="button" class="btn btn-outline-info">수정</button>
-                    </div>
                     <div>
                         <button type="button" class="btn btn-outline-danger">삭제</button>
                     </div>
@@ -307,9 +324,6 @@
                 <p>리뷰가 여기 달립니다.</p>
                 <footer class="blockquote-footer">닉네임</footer>
                 <div style="display: flex;">
-                    <div id="update_review" style="margin-right: 10px;">
-                        <button type="button" class="btn btn-outline-info">수정</button>
-                    </div>
                     <div id="delete_review">
                         <button onclick="delete_review()" type="button" class="btn btn-outline-danger">삭제</button>
                     </div>

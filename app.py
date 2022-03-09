@@ -22,18 +22,7 @@ client = pymongo.MongoClient('mongodb+srv://test:sparta@cluster0.6cz6m.mongodb.n
 db = client.seoul_restroom
 
 # 페이지별 기능 구현
-## 메인페이지 templates
-@app.route('/')
-def home():
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
 
-        return render_template('index.html')
-    except jwt.ExpiredSignatureError:
-        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-    except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/login')
 def login():
@@ -88,7 +77,15 @@ def check_dup():
 ### 구별 화장실 list templates
 @app.route('/gu_names/<gu_name>') #태성 주소수정필요
 def rest_list(gu_name):
+    # kangnam all restroom in kangnam
+    # base_info -> if address inccludes "kangman" return it to us
+    # <ul id="restroom_list">
+    #   <a href="/gu_names/강서구/1">우성스포츠센터 1</a>
+    # </ul>
+    #let restrooms_in_gu = list(db.base_info.find({address includes gu_name}, {'_id': False})) # [{name: 'woosung', address: '', id: 1}, {}, {}]
+
    return render_template('restroom_list.html'.format(gu_name))
+   # return jsonify({ restroom_list: restrooms_in_gu, gu_name: gu_name })
 
 @app.route('/api') #태성
 def rest_room_ls():
@@ -128,12 +125,13 @@ def detail_home(gu_name, restroom_id):
 
     base_info = db.base_info.find_one({"restroom_id": restroom_id})
     other_info = db.district.find_one({"restroom_id": base_info},{"_id":False})
-    return render_template('index.html', x = other_info['X_WGS84'], y = other_info['Y_WGS84'])
+    return render_template('detail.html', x = other_info['X_WGS84'], y = other_info['Y_WGS84'])
+
 
 # detailpage
 ## review_append
 @app.route("/review", methods=["POST"])
-def review_post():
+def reivew_post():
     name_receive = request.form["name_give"]
     comment_receive = request.form["comment_give"]
     star_receive = request.form['star_give']
@@ -145,7 +143,7 @@ def review_post():
         'star': star_receive,
         'num':count
     }
-    print(doc)
+
     db.reivew.insert_one(doc)
     return jsonify({'msg':'댓글저장 완료!'})
 
