@@ -1,0 +1,46 @@
+@charset "utf-8";
+
+/*#my-id
+<p id="my-id">  또는  <a id="my-id"> 를 선택*/
+/*.my-class*/
+/*<p class="my-class"> 와 <a class="my-class"> 를 선택*/
+
+/*                                          img[src]*/
+/*<img src="myimage.png"> 를 선택하지만 <img>  는 선택 안함*/
+/*                      a:hover*/
+/*<a> 를 선택하지만, 마우스 포인터가 링크위에 있을 때만 선택함*/
+
+.col-md-4 {
+    max-width: 390px;
+    width: 100%;
+}
+
+#map {
+    max-width: 390px;
+    height: 399px;
+    width: 100%;
+}
+
+.col-md-8 {
+    padding-left: 10px;
+    padding-top:20px;
+    max-width: 700px;
+    length: 300px;
+    width: 90%;
+    background-color: transparent;
+
+
+}
+
+.card-title {
+    padding-left: 50px;
+    font-size: xxx-large;
+}
+
+.card-text {
+    font-size: xx-large;
+}
+
+#restroom-box {
+    background-color: skyblue;
+}
