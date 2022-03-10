@@ -7,7 +7,7 @@ function call_restroom_list() {
     var url_string = window.location.href;
     var url = new URL(url_string);
     // {#url에서 구이름 추출하기#}
-    var guname = url.href.replace("http://14.42.75.92:5000/gu_names/", "")
+    var guname = url.href.replace("http://192.168.0.17:5000/gu_names/", "")
 
     $.ajax({
         type: 'GET',

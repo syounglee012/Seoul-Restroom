@@ -9,13 +9,13 @@ import hashlib
 from datetime import datetime, timedelta
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
-SECRET_KEY = ''
+SECRET_KEY = 'SPARTA'
 
 # mongo db setting
 import certifi
 import pymongo
 ca = certifi.where()
-client = pymongo.MongoClient('', tlsCAFile=ca)
+client = pymongo.MongoClient('mongodb+srv://test:sparta@cluster0.6cz6m.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.seoul_restroom
 
 ###########-*/ Code Start /*-###########
@@ -60,9 +60,10 @@ def sign_in():
         }
         # JWT 토큰 발행
         # .decode('utf-8')삭제->이미 decode 되었기때문에 decode 할게없다고함
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
         # JWT 토큰 -> 클라이언트로 발행
         return jsonify({'result': 'success', 'token': token})
+
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
