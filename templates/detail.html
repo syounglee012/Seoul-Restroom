@@ -113,7 +113,23 @@
                     let name = rows['name']
                     let address = rows['address']
                     console.log(name, address)
-                    let temp_html = `<div class="row g-0">
+                    let substring = "화장실"
+
+                    let temp_html=``
+
+                    if (name.includes(substring))
+
+                    temp_html = `<div class="row g-0">
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                        <p class="card-title">${name}</p>
+                                                        <p class="card-text">위치: ${address}</p>
+                                                    </div>
+                                                </div>
+                                            </div>`
+
+                    else{
+                        temp_html = `<div class="row g-0">
                                                 <div class="col-md-8">
                                                     <div class="card-body">
                                                         <p class="card-title">${name} 화장실</p>
@@ -121,7 +137,11 @@
                                                     </div>
                                                 </div>
                                             </div>`
+                    }
+
                     $('#detail_info_append').append(temp_html)
+
+
                 }
             })
         }
