@@ -1,0 +1,36 @@
+*{
+    font-family: 'Cute Font', cursive;
+}
+.all{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+.title{
+    background-color: #5bccf8;
+    width:100%;
+    height: 120px;
+    color:white;
+    margin-bottom:10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+
+    border-radius: 5px;
+
+}
+.btn{
+    width: 100px;
+    margin: 0 10px;
+    background-color:#5bccf8;
+    border-color: #5bccf8;
+    font-size: 25px;
+}
+.seoulimg{
+    width: 500px;
+    height: 300px;
+}

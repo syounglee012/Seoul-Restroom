@@ -1,15 +1,3 @@
-@charset "utf-8";
-
-/*#my-id
-<p id="my-id">  또는  <a id="my-id"> 를 선택*/
-/*.my-class*/
-/*<p class="my-class"> 와 <a class="my-class"> 를 선택*/
-
-/*                                          img[src]*/
-/*<img src="myimage.png"> 를 선택하지만 <img>  는 선택 안함*/
-/*                      a:hover*/
-/*<a> 를 선택하지만, 마우스 포인터가 링크위에 있을 때만 선택함*/
-
 .col-md-4 {
     max-width: 390px;
     width: 100%;
@@ -109,7 +97,3 @@ body {
 #comment {
     height: 150px;
 }
-
-
-
-

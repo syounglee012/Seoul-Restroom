@@ -1,0 +1,51 @@
+ * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.3)), url("https://cdn.pixabay.com/photo/2020/03/26/20/44/toilet-paper-4971760_960_720.jpg");
+            background-size: auto;
+            background-position: center;
+
+        }
+
+        .section {
+            padding: 1rem 1.5rem;
+            max-width: 750px;
+            margin: auto;
+
+        }
+        .box {
+            opacity : 80%;
+        }
+
+        .title {
+            font-weight: 800;
+            font-size: 5rem;
+            font-family: 'Mochiy Pop One', sans-serif;
+        }
+
+        .subtitle {
+            font-size: 2.5rem;
+            font-family: 'Mochiy Pop One', sans-serif;
+        }
+
+        .is-sparta {
+            color: #4eaad9 !important;
+        }
+
+        .button.is-sparta {
+            background-color: #115b8d;
+            border-color: transparent;
+            color: #fff !important;
+        }
+
+        .button.is-sparta.is-outlined {
+            background-color: transparent;
+            border-color: #115b8d;
+        }
+
+        .help {
+            color: gray;
+        }
